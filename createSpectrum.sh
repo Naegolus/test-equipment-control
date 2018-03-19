@@ -22,26 +22,41 @@ echo "Date:    $(${osciDir}/cmd.py ":syst:date?")"
 
 echo "Reseting"
 exeCmd "*rst"
-sleep 1.0
-exeCmd ":tim:scal 2.5e-8"
-exeCmd ":trig:edg:lev 2.5"
+sleep 2.0
 
 echo "Channel 2"
 cid="2"
-exeCmd ":chan${cid}:disp off"
 exeCmd ":chan${cid}:prob 10"
+exeCmd ":chan${cid}:scal 2"
+exeCmd ":chan${cid}:offs -6.0"
 
 echo "Channel 1"
 cid="1"
+#exeCmd ":chan${cid}:disp off"
 exeCmd ":chan${cid}:prob 10"
-exeCmd ":chan${cid}:scal 1"
-exeCmd ":chan${cid}:offs -4.0"
+exeCmd ":chan${cid}:scal 2"
+exeCmd ":chan${cid}:offs 0.0"
+
+echo "Misc."
+exeCmd ":tim:scal 2.5e-8"
+exeCmd ":trig:edg:lev 2.5"
+echo
+
+echo "Setting frequency: 0"
+${funcGenDir}/setFrequency.py 0 0
+amp=$(${osciDir}/cmd.py ":meas:vavg? chan1")
+echo "Vpp1 = ${amp} [V]"
+amp=$(${osciDir}/cmd.py ":meas:vavg? chan2")
+echo "Vpp2 = ${amp} [V]"
 
 counterPostfix="000000"
-for i in `seq 0 4${counterPostfix} 20${counterPostfix}`
+for i in `seq 4${counterPostfix} 4${counterPostfix} 20${counterPostfix}`
 do
 	echo "Setting frequency: $i"
 	${funcGenDir}/setFrequency.py 0 $i
 	sleep 0.2
-	echo "Vpp = $(${osciDir}/cmd.py ":meas:vpp? chan1") [V]"
+	amp=$(${osciDir}/cmd.py ":meas:vpp? chan1")
+	echo "Vpp1 = ${amp} [V]"
+	amp=$(${osciDir}/cmd.py ":meas:vpp? chan2")
+	echo "Vpp2 = ${amp} [V]"
 done
