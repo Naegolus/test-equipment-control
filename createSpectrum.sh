@@ -55,7 +55,7 @@ amp2=$(${osciDir}/cmd.py ":meas:vavg? chan2")
 echo "0; ${amp1}; ${amp2}" > ${outFile}
 
 counterPostfix="000000"
-for i in `seq 4${counterPostfix} 4${counterPostfix} 20${counterPostfix}`
+for i in $(seq 4${counterPostfix} 4${counterPostfix} 20${counterPostfix})
 do
 	#echo "Setting frequency: $i"
 	${funcGenDir}/setFrequency.py 0 $i
