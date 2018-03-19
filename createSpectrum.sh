@@ -69,4 +69,6 @@ do
 	echo "$i; ${amp1}; ${amp2}" >> ${outFile}
 done
 
+#octave -q createSpectrum.m
+
 echo "Done"
