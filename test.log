@@ -1,0 +1,28 @@
+Initializing function generator
+Initializing oscilloscope
+ID:      RIGOL TECHNOLOGIES,DS2202,DS2A152801726,00.01.01
+Version: 1999.0
+Date:    2018, 3,19
+Reseting
+Channel 2
+Channel 1
+Misc.
+
+Setting frequency: 0
+Vpp1 = 2.568800e+00 [V]
+Vpp2 = 9.531434e-02 [V]
+Setting frequency: 4000000
+Vpp1 = 4.400000e+00 [V]
+Vpp2 = 2.400000e-01 [V]
+Setting frequency: 8000000
+Vpp1 = 4.320000e+00 [V]
+Vpp2 = 1.600000e-01 [V]
+Setting frequency: 12000000
+Vpp1 = 4.320000e+00 [V]
+Vpp2 = 2.400000e-01 [V]
+Setting frequency: 16000000
+Vpp1 = 4.080000e+00 [V]
+Vpp2 = 2.400000e-01 [V]
+Setting frequency: 20000000
+Vpp1 = 3.600000e+00 [V]
+Vpp2 = 2.400000e-01 [V]
