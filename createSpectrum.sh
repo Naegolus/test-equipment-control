@@ -2,6 +2,7 @@
 
 funcGenDir="../pyFY3200S"
 osciDir="../eevt002"
+outFile="./spec.csv"
 
 exeCmd()
 {
@@ -42,21 +43,29 @@ exeCmd ":tim:scal 2.5e-8"
 exeCmd ":trig:edg:lev 2.5"
 echo
 
-echo "Setting frequency: 0"
+echo "Creating ${outFile}"
+#echo "Setting frequency: 0"
 ${funcGenDir}/setFrequency.py 0 0
-amp=$(${osciDir}/cmd.py ":meas:vavg? chan1")
-echo "Vpp1 = ${amp} [V]"
-amp=$(${osciDir}/cmd.py ":meas:vavg? chan2")
-echo "Vpp2 = ${amp} [V]"
+sleep 0.2
+amp1=$(${osciDir}/cmd.py ":meas:vavg? chan1")
+#echo "Vpp1 = ${amp1} [V]"
+amp2=$(${osciDir}/cmd.py ":meas:vavg? chan2")
+#echo "Vpp2 = ${amp2} [V]"
+
+echo "0; ${amp1}; ${amp2}" > ${outFile}
 
 counterPostfix="000000"
 for i in `seq 4${counterPostfix} 4${counterPostfix} 20${counterPostfix}`
 do
-	echo "Setting frequency: $i"
+	#echo "Setting frequency: $i"
 	${funcGenDir}/setFrequency.py 0 $i
 	sleep 0.2
-	amp=$(${osciDir}/cmd.py ":meas:vpp? chan1")
-	echo "Vpp1 = ${amp} [V]"
-	amp=$(${osciDir}/cmd.py ":meas:vpp? chan2")
-	echo "Vpp2 = ${amp} [V]"
+	amp1=$(${osciDir}/cmd.py ":meas:vpp? chan1")
+	#echo "Vpp1 = ${amp1} [V]"
+	amp2=$(${osciDir}/cmd.py ":meas:vpp? chan2")
+	#echo "Vpp2 = ${amp2} [V]"
+
+	echo "$i; ${amp1}; ${amp2}" >> ${outFile}
 done
+
+echo "Done"
